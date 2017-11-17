@@ -22,8 +22,8 @@ public class CimatempoResource {
 	private ClimatempoService climatempoService;
 	
 	@GetMapping("locale/{uf}")
-	public ResponseEntity<?> getLocalesByUf(@PathVariable String uf){
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>().put("state", uf));
+	public ResponseBody getLocalesByUf(@PathVariable String uf){
+		return (ResponseBody) new HashMap<>().put("state", uf);
 	}
 	
 	@GetMapping("locale/{city}/{uf}")
