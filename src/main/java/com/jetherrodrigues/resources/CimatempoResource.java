@@ -2,13 +2,15 @@ package com.jetherrodrigues.resources;
 
 import static com.jetherrodrigues.util.VersionUtil.*;
 
-import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.jetherrodrigues.model.City;
+import com.jetherrodrigues.model.Weather;
 import com.jetherrodrigues.service.ClimatempoService;
 
 /**
@@ -22,12 +24,12 @@ public class CimatempoResource {
 	private ClimatempoService climatempoService;
 	
 	@GetMapping("locale/{uf}")
-	public ResponseBody getLocalesByUf(@PathVariable String uf){
-		return (ResponseBody) new HashMap<>().put("state", uf);
+	public ResponseEntity<List<City>> getLocalesByUf(@PathVariable String uf){
+		return new ResponseEntity<List<City>>(climatempoService.getCitiesByUf(uf), HttpStatus.OK);
 	}
 	
-	@GetMapping("locale/{city}/{uf}")
-	public ResponseEntity<?> getLocaleByCity(@PathVariable String city, @PathVariable String uf){
-		return ResponseEntity.status(HttpStatus.OK).body(new HashMap<>().put("city-uf", city + " - " + uf));
+	@GetMapping("weather/{cityCode}")
+	public ResponseEntity<Weather> getWeatherByCityCode(@PathVariable String cityCode){
+		return new ResponseEntity<Weather>(climatempoService.getWeatherByCity(cityCode), HttpStatus.OK);
 	}
 }
