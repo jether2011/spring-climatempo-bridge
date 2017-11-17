@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.jetherrodrigues.model.City;
 import com.jetherrodrigues.model.Weather;
 import com.jetherrodrigues.service.ClimatempoService;
 
@@ -24,8 +23,8 @@ public class CimatempoResource {
 	private ClimatempoService climatempoService;
 	
 	@GetMapping("locale/{uf}")
-	public ResponseEntity<List<City>> getLocalesByUf(@PathVariable String uf){
-		return new ResponseEntity<List<City>>(climatempoService.getCitiesByUf(uf), HttpStatus.OK);
+	public ResponseEntity<List<Object>> getLocalesByUf(@PathVariable String uf){
+		return new ResponseEntity<List<Object>>(climatempoService.getCitiesByUf(uf), HttpStatus.OK);
 	}
 	
 	@GetMapping("weather/{cityCode}")
